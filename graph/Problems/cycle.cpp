@@ -16,23 +16,31 @@ void fio(){
   cout.tie(0);
 }
 int n,m; 
-vector<vector<pair<int,int> > > adj(MAXN);
+vector<vector<pair<int,LL> > > adj(MAXN);
 int vis[MAXN];
 int act[MAXN];
+LL wt[MAXN];
 stack <int> s;
  
-void dfs(int i, int b = 0){
+void dfs(int i, LL b = 0){
   s.push(i);
+//  cout<<i<<" ";
+  wt[i] = b;
   act[i] = 1;
-  //  cout<<i<<" "<<p<<" "<<b<<endl;
+  //for(auto j:adj[i]) cout<<j.fi<<" ";
+ // cout<<endl;
   for(auto u:adj[i]){
-    b |= u.se<0;
-    if(act[u.fi] && b){
+   // cout<<u.fi<<" ----- ----"<<i<<endl;
+    LL zz = b + u.se - wt[u.fi];
+    if(act[u.fi] && zz<=0LL){
       vector <int> v;
-      while(!s.empty()){
+//      cout<<"yes"<<endl;
+      while(s.top()!=u.fi){
         v.pb(s.top());
+     //   cout<<s.top()<<" ---"<<endl;
         s.pop();
       }
+ // cout<<"yes2"<<endl;
       reverse(v.begin(), v.end());
       cout<<"YES\n";
       cout<<u.fi<<" ";
@@ -40,10 +48,13 @@ void dfs(int i, int b = 0){
       cout<<u.fi<<endl;
       exit(0);
     }
-    if(!vis[u.fi])
-      dfs(u.fi,b);
+    
+    if(vis[u.fi]==0 && act[u.fi]==0)
+    {// cout<<"yo"<<endl;
+      dfs(u.fi,b+u.se);
+    }
   }
-  act[i] = 0; 
+  act[i] =0;
   vis[i] = 1;
   s.pop();
 }
@@ -52,10 +63,12 @@ int main(){
   fio();
   cin>>n>>m;
   forn(i,m){
-    int u,v,w; cin>>u>>v>>w;
+    int u,v;
+    LL w; cin>>u>>v>>w;
     adj[u].pb({v,w});
   }
   for1(i,n) if(!vis[i]) dfs(i);
   cout<<"NO\n";
   return 0;
 }
+
