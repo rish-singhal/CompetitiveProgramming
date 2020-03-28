@@ -1,30 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-#define fi first
-#define se second
-#define pb push_back
-#define forn(i,n) for(int i=0;i<(n);i++)
 #define for1(i,n) for(int i=1;i<=n;i++)
-#define forr(i,n) for(int i=n;i>=0;i--)
-#define all(x) x.begin(), x.end()
-const int MAXN = 1e5 +5;
+const int MAXN = 2e5 +5;
 
-void fio(){
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-  cout.tie(0);
+int n,m, dsu[MAXN];
+int par(int i){
+  return dsu[i]<0?i:dsu[i] = par(dsu[i]);
+}
+
+void merge(int u,int v){
+  u = par(u), v= par(v);
+  if(u==v) return;
+  if(u > v) swap(u,v);
+  dsu[u] = v;
 }
 
 
-
 int main(){
-  fio();
-  for(int i=0;i<n;i++){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+  
+  cin>>n>>m;
+  memset(dsu,-1,sizeof dsu);
+  for(int i=0;i<m;i++){
     int u,v; cin>>u>>v;
-    adj[u].pb(v);
-    adj[v].pb(u);
-} 
+    merge(u,v);
+  } 
+  int an =0;
+  for1(i,n-1){
+    int x = par(i), y=par(i+1);
+    if(x==i || x == y) continue;
+    if(x!=y){
+      an++; merge(i,i+1); }
+  }
+  cout<<an<<"\n";
   return 0;
 }
 
