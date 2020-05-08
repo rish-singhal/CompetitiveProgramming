@@ -8,7 +8,7 @@ typedef long long LL;
 #define for1(i,n) for(int i=1;i<=n;i++)
 #define forr(i,n) for(int i=n;i>=0;i--)
 #define all(x) x.begin(), x.end()
-const int MAXN = 2e5 +5;
+const int MAXN = (1<<11) +5;
 
 void fio(){
   ios::sync_with_stdio(0);
@@ -16,10 +16,8 @@ void fio(){
   cout.tie(0);
 }
 
-int n,m;
-vector<int> v;
-vector<vector<int> > adj(MAXN);
-vector<vector<int> > boo(MAXN);
+int n;
+vector <vector <int> > adj(MAXN);
 vector<int> tp;
 int vis[MAXN], comp[MAXN];
 
@@ -36,21 +34,22 @@ void dfs2(int i, int c){
 		if(!comp[j]) dfs2(j, c);
 }
 
-void check_2sat(){
-	forn(i,2*m){
+int check_2sat(){
+	tp.clear();
+	forn(i,2*n) vis[i]=comp[i]=0;
+	forn(i,2*n){
 		if(!vis[i]) dfs(i);
 	}
 	int cc = 0;
 	for(auto i:vector<int>(tp.rbegin(), tp.rend())){
 		if(!comp[i]) dfs2(i,++cc);
 	}
-	for(int i=0;i<m;i++){
+	for(int i=0;i<n;i++){
 		if(comp[i<<1]==comp[i<<1|1]){
-			cout<<"NO\n";
-			exit(0);
+			return 0;
 		}
 	}
-	cout<<"YES\n";
+	return 1;
 }
 
 int xx(int i){
@@ -61,14 +60,16 @@ int cx(int i){
 	return 2*i+1;
 }
 
-int add(int a, int b){
+void addxor(int a, int b){
+	//cout<<"xor"<<"--"<<endl;
 	adj[cx(a)].pb(xx(b));
 	adj[cx(b)].pb(xx(a));
 	adj[xx(a)].pb(cx(b));
 	adj[xx(b)].pb(cx(a));
 }
 
-int inv(int a, int b){
+void addinv(int a, int b){
+	//cout<<"inv"<<"--"<<endl;
 	adj[cx(a)].pb(cx(b));
   	adj[cx(b)].pb(cx(a));
   	adj[xx(a)].pb(xx(b));
@@ -77,29 +78,39 @@ int inv(int a, int b){
 
 int main(){
   fio();
-  cin>>n>>m;
-  v.resize(n);
-  for(auto &i:v){
-   cin>>i;
-}	
-
-  forn(i,m){	
-  	int t; cin>>t;
-  	while(t--){
-  		int x; cin>>x;
-  		x--;
-  		boo[x].pb(i);
+  int t; cin>>t;
+  while(t--){
+  	cin>>n;
+  	int ann = 1;
+  	forn(i,MAXN) {
+  		adj[i].clear();
   	}
+  	int a[MAXN][MAXN], b[MAXN][MAXN]; 
+  	forn(i,n) forn(j,n) cin>>a[i][j];
+  	forn(i,n) forn(j,n) cin>>b[i][j];
+  	forn(i,n){
+  		forn(j,n){
+  			if(a[i][j]==b[i][j] && a[j][i]==a[i][j] && b[i][j]==b[j][i])
+  				{
+            continue;
+          }
+  			if(a[i][j]==b[i][j] && a[j][i]==b[j][i])
+  					{
+              addinv(i,j);
+              continue;
+            }
+  			if(a[j][i]==b[i][j] && a[i][j]==b[j][i])
+  					{ addxor(i,j); continue;
+            }
+
+  				cout<<"No\n";
+  				ann = 0;
+  				break;
+  		}
+      if(ann==0)break;
+    }
+  	if(ann==0) continue;
+  	cout<<(check_2sat()?"Yes\n":"No\n");
   }
-  map< pair<int,int> , int> mm;
-  forn(i,n){
-  	int a = boo[i][0];
-  	int b = boo[i][1];
-  	if(v[i]==0)
-  		add(a,b);
-  	else 
-  		inv(a,b);
-  }
-  check_2sat();
   return 0;
 }
