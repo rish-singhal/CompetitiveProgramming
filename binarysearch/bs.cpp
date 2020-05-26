@@ -16,6 +16,7 @@ void fio(){
   cout.tie(0);
 }
 
+// for F F F F T T T T " finding first T "
 int fun(){
   int L = 0, R = n;
   while(L<R){
