@@ -18,29 +18,27 @@ void fio(){
 
 vector<LL> prime;
 bool comp[MAXN];
-LL ans[MAXN];
-LL cnt[MAXN];
+LL f[MAXN];
 
 void seive(){
 	fill(comp,comp+MAXN,0);
-	ans[1] = 1;
+	f[1] = 1;
 	for(int i=2;i<=MAXN;i++){
 		if(!comp[i]){
+		// function for f(p)
+		// an[i] = 
 		 prime.pb(i);
-		 ans[i] = i*i*1LL - i + 1;
-		 cnt[i] = i;
 		}
 		for(auto p:prime){
 			if(p*i>MAXN) break;
 			comp[p*i] = 1;
 			if(!(i%p)) {
-				cnt[p*i] = cnt[i]*p;
-				ans[p*i] = (ans[i/cnt[i]])*(ans[cnt[i]]+cnt[p*i]*(cnt[p*i]-cnt[i]));
+			// function for f(p*i) when p|i
+			//	ans[p*i] = (ans[i/cnt[i]])*(ans[cnt[i]]+cnt[p*i]*(cnt[p*i]-cnt[i]));
 				break;
 			}
 			else{
-				cnt[p*i] = p;
-				ans[p*i] = ans[p]*ans[i];			
+				f[p*i] = f[p]*f[i];			
 			}
 		}
 	}
@@ -52,7 +50,7 @@ int main(){
   int t; cin>>t;
   while(t--){
   	int n; cin>>n;
-  	cout<<ans[n]<<"\n";
+  	cout<<f[n]<<"\n";
   }  
   return 0;
 
