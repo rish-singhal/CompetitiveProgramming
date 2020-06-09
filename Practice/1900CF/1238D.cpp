@@ -10,7 +10,6 @@ typedef long long LL;
 #define all(x) x.begin(), x.end()
 const int MAXN = 1e5 +5;
 
-
 template <typename A, typename B>
 string to_string(pair<A, B> p);
  
@@ -96,29 +95,29 @@ void debug_out(Head H, Tail... T) {
 
 #define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
 
-int nxt(){
-  int x; cin>>x;
-  return x;
+
+void fio(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
 }
 
+
 int main(){
-  ios::sync_with_stdio(false);
-  cin.tie(NULL);
-  cout.tie(NULL);
-  //int n = nxt();
-  //vector <int> v(n);
-  //generate(all(v), nxt);
-  //cout<<(*max_element(all(v)))<<endl;
-
-  vector<pair<int,int>> p;
-  forn(i,10){
-  	p.pb({i,1});
+  fio();
+  LL n; cin>>n;
+  string s; cin>>s;
+  LL an = n*(n-1)/2;
+ debug(an);
+  vector<int> v2(2,-1);
+  vector<LL> cn(2);
+  forn(i,n){
+  	int d = s[i]-'A';
+  	an-=(i-v2[d]-1);
+  	if(cn[d^1] && (i-v2[d]==1)) an--;
+  	cn[s[i]-'A']++;
+  	v2[s[i]-'A'] = i;
   }
-  int x = 1, y = 2;
-  debug(x,y);
-  for(auto &[x,y]:p) cout<<x<<" "<<y<<" ";
-  	cout<<endl;
-
-  
+  cout<<an<<endl;
   return 0;
 }

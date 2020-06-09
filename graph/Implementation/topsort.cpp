@@ -18,7 +18,7 @@ vector <int> tp;
 
 void dfs(int i){
   if(act[i]){
-    b= 0; return;
+    b = 0; return;
   }
   act[i] = 1;
   vis[i] = 1;
@@ -29,6 +29,7 @@ void dfs(int i){
   act[i] = 0;
   tp.pb(i);
 }
+
 int main(){
   fio();
   cin>>n>>m;

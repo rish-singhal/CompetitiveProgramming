@@ -10,7 +10,6 @@ typedef long long LL;
 #define all(x) x.begin(), x.end()
 const int MAXN = 1e5 +5;
 
-
 template <typename A, typename B>
 string to_string(pair<A, B> p);
  
@@ -96,29 +95,69 @@ void debug_out(Head H, Tail... T) {
 
 #define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
 
-int nxt(){
-  int x; cin>>x;
-  return x;
+
+void fio(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
 }
 
 int main(){
-  ios::sync_with_stdio(false);
-  cin.tie(NULL);
-  cout.tie(NULL);
-  //int n = nxt();
-  //vector <int> v(n);
-  //generate(all(v), nxt);
-  //cout<<(*max_element(all(v)))<<endl;
-
-  vector<pair<int,int>> p;
-  forn(i,10){
-  	p.pb({i,1});
+  fio();
+  int n,m; cin>>n>>m;
+  vector<vector<int>> adj(n);
+  vector<int> c(n);
+  forn(i,m){
+  	int u,v; cin>>u>>v;
+  	u--,v--;
+  	adj[u].pb(v);
+  	adj[v].pb(u);
   }
-  int x = 1, y = 2;
-  debug(x,y);
-  for(auto &[x,y]:p) cout<<x<<" "<<y<<" ";
-  	cout<<endl;
-
-  
+  c[0] = 1;
+  vector<int> cn(4);
+  int k = 0;
+  for(auto i:adj[0])
+  	{
+  		c[i] = 2;
+  		k = i;
+  		cn[2] ++;
+  	}
+  //debug(k);
+  //debug(adj[k]);
+  for(auto i:adj[k]){
+  	if(c[i]==2) {
+  		c[i] = 3;
+  		cn[3]++;
+  		cn[2]--;
+  	//	cout<<"yy"<<endl;
+  	}
+  }
+  cn[1] = n - cn[2] - cn[3];
+  if(cn[1]*cn[2] + cn[1]*cn[3] + cn[3]*cn[2] != m || cn[1]<=0 || cn[2]<=0 || cn[3]<=0){
+  	cout<<-1<<endl;
+  	return 0;
+  }
+ // debug(cn);
+ // debug(c);
+  forn(i,n) c[i] = max(1,c[i]);
+  forn(i,n){
+  	//if(~c[i]) c[i] = 1;
+  	int cnt = 0;
+  	for(auto j:adj[i]){
+  		if(c[j]==c[i]){
+  			//debug(adj[i]);
+  			//debug(i, j);
+  			cout<<-1<<endl;
+  			return 0;
+  		}
+  		cnt++;
+  	}
+  	if(cnt + cn[c[i]]!=n){
+  		cout<<-1<<endl;
+  			return 0;
+  	}
+  }
+  forn(i,n) cout<<c[i]<<" ";
+  cout<<endl;
   return 0;
 }
