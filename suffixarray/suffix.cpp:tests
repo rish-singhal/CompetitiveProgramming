@@ -1,0 +1,14 @@
+[
+	{
+		"test": "ababba\n3\nba\nbaba\nabba\n"
+	},
+	{
+		"test": "codeforces\n3\ncode\nforces\nmath\n"
+	},
+	{
+		"test": "a\n2\na\na\n"
+	},
+	{
+		"test": "itmouniversity\n3\nit\nmore\nuniversity\n"
+	}
+]
