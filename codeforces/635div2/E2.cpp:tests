@@ -1,0 +1,30 @@
+[
+	{
+		"correct_answers":
+		[
+			"12"
+		],
+		"test": "abab\nba\n"
+	},
+	{
+		"correct_answers":
+		[
+			"0"
+		],
+		"test": "defineintlonglong\nsignedmain\n"
+	},
+	{
+		"correct_answers":
+		[
+			"4"
+		],
+		"test": "rotator\nrotator\n"
+	},
+	{
+		"correct_answers":
+		[
+			"24"
+		],
+		"test": "cacdcdbbbb\nbdcaccdbbb\n"
+	}
+]

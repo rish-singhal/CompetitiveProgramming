@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long LL;
+typedef vector<int> vi;
+typedef vector<vi> vii;
+#define fi first
+#define se second
+#define pb push_back
+#define forn(i,n) for(int i=0;i<(n);i++)
+#define for1(i,n) for(int i=1;i<=n;i++)
+#define forr(i,n) for(int i=n;i>=0;i--)
+#define all(x) x.begin(), x.end()
+#define sz(x) ((int)x.size())
+const int MAXN = 1e5 +5;
+
+void fio(){
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cout.tie(0);
+}
+
+int main(){
+  fio();
+  int t; cin>>t;
+  while(t--){
+  	string s; cin>>s;
+  	vector<int> v(10);
+  	int n = (int)s.size();
+  	forn(i,n) v[s[i]-'0']++;
+  	int m = 0;
+  	forn(i,10) m = max(m, v[i]);
+  	forn(i,10){
+  		forn(j,10){
+  			int tt = 0;
+  			int cnt = 0;
+  			forn(k,n){
+  				if(tt == 0 && s[k] == (i + '0')){
+  					tt = 1;
+  					cnt++;
+  					continue;
+  				}
+  				if(tt == 1 && s[k] == (j + '0')){
+  					tt = 0;
+  					cnt++;
+  					continue;
+  				}
+  			}
+  			if(cnt%2 == 1){
+  				cnt--;
+  			}
+  			m = max(m, cnt);
+  		}
+  	}
+  	cout<<(n-m)<<endl;
+  }
+  return 0;
+}

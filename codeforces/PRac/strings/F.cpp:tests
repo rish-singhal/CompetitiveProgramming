@@ -1,0 +1,17 @@
+[
+	{
+		"test": "3\n#book\n#bigtown\n#big\n"
+	},
+	{
+		"test": "3\n#book\n#cool\n#cold\n"
+	},
+	{
+		"test": "4\n#car\n#cart\n#art\n#at\n"
+	},
+	{
+		"test": "3\n#apple\n#apple\n#fruit\n"
+	},
+	{
+		"test": "\n4\n#car\n#cart\n#ats\n#at\n"
+	}
+]
