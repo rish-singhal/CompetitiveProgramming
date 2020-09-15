@@ -288,7 +288,7 @@ int main(){
   vector<Mint> dp2(n + 1,0);
   dp2[0] = 0;
   for1(i, n){
-  	dp2[i] = dp2[i-1]
+  	dp2[i] = dp2[i-1];
   }
 
   while(m--){

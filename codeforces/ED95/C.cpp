@@ -129,13 +129,9 @@ int main(){
   	}
 
   	LL an = INF;
-  	forn(j,2){
-  		forn(k,2){
+  	forn(j,2)
+  		forn(k,2)
   			an = min(an, dp[n-1][j][k]);
-  			//cout<<j<<" "<<k<<" : "<<dp[n-1][j][k]<<endl;
-  		}
-  	//	cout<<endl;
-  	}
   	cout<<an<<endl;
   }
   return 0;
