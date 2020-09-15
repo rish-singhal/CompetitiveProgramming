@@ -1,8 +1,0 @@
-[
-	{
-		"test": "ATGCATGC\n4\n2 1 8 ATGC\n2 2 6 TTT\n1 4 T\n2 2 6 TA\n"
-	},
-	{
-		"test": "1000 245\n\n\n\n"
-	}
-]
