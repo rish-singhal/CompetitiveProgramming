@@ -1,2 +1,9 @@
-.DS_Store
-*.cpp:tests
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
