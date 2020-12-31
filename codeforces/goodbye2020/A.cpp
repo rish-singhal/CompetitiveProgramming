@@ -14,7 +14,6 @@ typedef vector<vi> vii;
 const int MAXN = 1e5 +5;
 // check MAXN
 
-
 void fio(){
   ios::sync_with_stdio(0);
   cin.tie(0);
@@ -22,11 +21,22 @@ void fio(){
 }
 
 int main(){
-  fio();
+  fio();	
   int t; cin>>t;
   while(t--){
-  	int n; cin>>n;
-  	
+    int n ; cin>>n;
+    vector <int> v(n);
+    forn(i,n) cin>>v[i];
+    set <LL> s;
+    forn(i,n){
+      LL su = 0 ;
+      for(int j = i; j < (n-1); j++)
+        {su += v[j+1] - v[j]; 
+      if(su)s.insert(su);}
+      //cout << su << " --- " << endl;
+      
+    }
+    cout<<s.size()<<endl;
   }
   return 0;
 }

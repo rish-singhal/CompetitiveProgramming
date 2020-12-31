@@ -14,7 +14,6 @@ typedef vector<vi> vii;
 const int MAXN = 1e5 +5;
 // check MAXN
 
-
 void fio(){
   ios::sync_with_stdio(0);
   cin.tie(0);
@@ -22,11 +21,34 @@ void fio(){
 }
 
 int main(){
-  fio();
+  fio();	
   int t; cin>>t;
   while(t--){
-  	int n; cin>>n;
-  	
+  	string s; cin>>s;
+  	int n = sz(s);
+  	int ans = 0;
+  	for(int i = 0; i < n - 1; i ++){
+  		int j = i, bb = 0;
+  		if(s[i] == s[i + 1])
+  		{
+  			//cout << " yes " << endl;
+  			ans ++;
+  			j = i + 1;
+  			bb = 1;
+  		}
+  		if(i + 2 < n && s[i] == s[i + 2])
+  		{
+  			ans ++;
+  			j = i + 2;
+  			if( i + 3 < n && s[i + 1] == s[i + 3] && !bb)
+  			{
+  				ans ++;
+  				j = i + 3;
+  			}
+  		}
+  		i = j;
+  	}
+  	cout << ans << endl;
   }
   return 0;
 }
