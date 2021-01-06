@@ -29,7 +29,7 @@ void solve(){
 		u--, v--;
 		mat[u][v] = mat[v][u] = 1;
 	}
-	vector< pair<LL, LL> > ve;
+	vector <bool> isclique(1LL << n, false);
 	forn(msk, 1LL << n)
 	{
 		vector <int> pp;
@@ -40,33 +40,20 @@ void solve(){
 			for(auto j:pp)
 				if(!mat[i][j]) b = 1;
 		if(!b)
-			ve.pb({pp.size(), msk});
+			isclique[msk] = 1;
 	}
-	sort(all(ve));
-	reverse(all(ve));
-	set <LL> s;
-	LL ans = 0;
-	for(auto msk: ve)
-	{
-		int b = 0;
-		vector <int> pp;
-		forn(no, n)
-			if(msk.se & (1LL << no)) {
-				pp.pb(no);
-				if(s.find(no) != s.end())
-					{
-						b = 1;
-						break;
-					}
-			}
-
-	    if(!b){
-	    	for(auto c: pp)
-	    		s.insert(c);
-	    	ans ++; 
-	    }
-	}
-	cout << ans - 1<< endl;
+  vector <LL> dp(1LL << n, 0);
+  forn(msk, 1LL << n)
+  {
+    dp[msk] = 1e17;
+    if(isclique[msk])
+      dp[msk] = 1;
+    else{
+      for(LL smsk = msk; smsk; smsk = (smsk - 1)&msk)
+        dp[msk] = min(dp[msk], dp[smsk] + dp[smsk^msk]);
+    }
+  }
+  cout << dp[(1LL << n) - 1] << endl;
 }
 
 int main(){
