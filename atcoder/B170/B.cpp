@@ -18,13 +18,11 @@ void fio(){
 
 int main(){
   fio();
-  LL x, y; cin>>x>>y;
-  forn(i,x+1){
-  	if( i*2 + (x-i)*4 == y){
-  		cout<<"Yes"<<endl;
-  		return 0;
-  	}
-  }
-  cout<<"No"<<endl;
+  vector<int> v(5);
+  forn(i,5){
+	cin>>v[i];
+	if(v[i]==0){cout<<i+1<<endl; return 0;
+	}
+}
   return 0;
 }

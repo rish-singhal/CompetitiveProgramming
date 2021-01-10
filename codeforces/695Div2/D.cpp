@@ -42,34 +42,25 @@ int main(){
   					dp[j][i] = (dp[j][i] + dp[j + z][i - 1])%mm;
 
   		}
-  		for(int j = 1; j < (n-1); j++)
-  			dp[j][i-1] = (2*dp[j][i-1])%mm;
   }
 
-  for(int i = 0; i < n; i++)
-  	{	
-  		LL ss = 2;
-  		for(int j = 0; j < k; j++)
-  			dp[i][k] = (dp[i][k] + dp[i][j])%mm;
-  		//dp[i][k-1] = (dp[i][k-1] + 2)%mm;
-  		cout << dp[i][k] << " ";
-  		//if(i == 0 || i == (n-1))
-  		//	dp[i][k-1] = (dp[i][k-1] - 1 + mm)%mm;
-  	}
-  
+  vector <LL> an(n, 0);
 
-  	cout << endl;
+  for(int i = 0; i < n; i++)
+  	for(int j = 0; j <= k; j++)
+  		an[i] = (an[i] + (dp[i][j]*dp[i][k-j])%mm)%mm;
+
   LL sum = 0;
   for(int i = 0; i < n; i++)
   {
-  	sum = (sum + v[i]*dp[i][k])%mm;
+  	sum = (sum + v[i]*an[i])%mm;
   }
   while(q--){
   	LL a, x; cin >> a >> x;
   	a --;
-  	sum = (sum - v[a]*dp[a][k])%mm;
+  	sum = (sum - v[a]*an[a])%mm;
   	sum = (mm + sum)%mm;
-  	sum = (sum + x*dp[a][k])%mm;
+  	sum = (sum + x*an[a])%mm;
   	v[a] = x;
   	cout << sum << endl;
   }
