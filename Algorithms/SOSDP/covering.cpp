@@ -44,9 +44,9 @@ int main(){
   	forn(msk, 1<<N)
   		if((msk & (1<<i)) == 0)
   			{
-  				F[msk|(1<<i)] = (F[msk] + F[msk|(1<<i)])%mm;
-  				G[msk|(1<<i)] = (G[msk] + G[msk|(1<<i)])%mm;
-  				H[msk|(1<<i)] = (H[msk] + H[msk|(1<<i)])%mm;
+  				F[msk] = (F[msk] + F[msk|(1<<i)])%mm;
+  				G[msk] = (G[msk] + G[msk|(1<<i)])%mm;
+  				H[msk] = (H[msk] + H[msk|(1<<i)])%mm;
   			}
 
   LL ans = 0;
