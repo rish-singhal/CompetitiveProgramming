@@ -1,0 +1,1 @@
+for s in [*open(0)][2::2]: print(*sorted(s.split(), key=lambda x:int(x)&1))
